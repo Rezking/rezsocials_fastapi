@@ -16,7 +16,7 @@ def get_posts(db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_c
     return posts
 
 @router.get("/private", response_model = List[schemas.PostResponse])
-def get_posts(db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
+def get_private_posts(db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
     posts = db.query(models.Post).filter(models.Post.owner_id == user_id.id).all()
     return posts
 
